@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icons/icon-192.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <title>Diário de Bordo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>Diário de Bordo</h1>
+    <button id="installBtn" class="install-btn" hidden>Instalar</button>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Nova entrada</h2>
+      <form id="entryForm" autocomplete="off">
+        <div class="field">
+          <label for="title">Título</label>
+          <input id="title" name="title" type="text" required placeholder="Ex: Treino de hoje" />
+        </div>
+        <div class="field">
+          <label for="date">Data</label>
+          <input id="date" name="date" type="date" required />
+        </div>
+        <div class="field">
+          <label for="description">Descrição</label>
+          <textarea id="description" name="description" rows="4" required placeholder="Como foi o seu dia?"></textarea>
+        </div>
+        <div class="actions">
+          <button type="submit" class="primary">Salvar</button>
+          <button type="reset" class="secondary">Limpar</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="list-header">
+        <h2>Minhas entradas</h2>
+        <button id="clearAllBtn" class="danger outline" title="Remover todas as entradas">Limpar tudo</button>
+      </div>
+      <ul id="entriesList" class="entries"></ul>
+      <p id="emptyState" class="empty" hidden>Nenhuma entrada ainda. Crie a primeira acima!</p>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <small>Funciona offline • Seus dados ficam somente neste dispositivo</small>
+  </footer>
+
+  <script src="app.js" type="module"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js');
+      });
+    }
+  </script>
+</body>
+</html>
